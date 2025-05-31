@@ -1,37 +1,8 @@
-Cloudflare Zone-Level IP Access Rules Deletion Script
-Overview
+Cloudflare account-Level IP Access Rules deletion script
+a script to auto delete hundreds of account-Level IP Access Rules.
 
-This PowerShell script automates the deletion of all zone-level IP Access Rules (firewall rules) from a specified Cloudflare zone. It fetches all rules associated with a zone and removes them one by one using the Cloudflare API.
+Thanks for alexfot94's "Cloudflare-Zone-Level-IP-Access-Rules-Deletion-Script". This script is modified from his work.
 
-This is especially useful for:
-
-    Cleaning up deprecated or temporary firewall rules.
-
-    Resetting a zone’s access control configuration.
-
-    Automating security policy enforcement.
-
-Technologies Used
-
-    PowerShell: Script automation and system integration.
-
-    Cloudflare API v4: Used to manage firewall rules at the zone level.
-
-    JSON over HTTPS: Communication with the API using standard REST principles.
-
-Prerequisites
-
-    PowerShell 5.1+ (Windows) or PowerShell Core (macOS/Linux).
-
-    A valid Cloudflare account with:
-
-        A registered email address.
-
-        A Global API Key (not API token).
-
-        The Zone ID of the site you want to manage (found in the Cloudflare dashboard).
-
-Script Configuration
 
 Before running the script, update the following configuration block with your actual Cloudflare credentials:
 
@@ -41,19 +12,17 @@ $headers = @{
   "Content-Type" = "application/json"
 }
 
-$zoneId = "your-zone-id"  # Replace with your Cloudflare zone ID
-
 Usage
 
     Open PowerShell.
 
-    Update the script with your credentials and zone ID.
+    Update the script with your credentials and account ID.
 
     Run the script.
 
     The script will:
 
-        Fetch all current zone-level IP Access Rules.
+        Fetch all current account-level IP Access Rules.
 
         Delete each rule individually.
 
@@ -63,7 +32,7 @@ Output
 
 The following log files will be saved to your Desktop:
 
-    deleted_zone_rules.txt
+    deleted_account_rules.txt
     Contains a list of all successfully deleted rules.
 
     failed_deletions.txt
