@@ -7,8 +7,8 @@ Thanks for alexfot94's "Cloudflare-Zone-Level-IP-Access-Rules-Deletion-Script". 
 Before running the script, update the following configuration block with your actual Cloudflare credentials:
 
 {
-  "X-Auth-Email" = "your-email@example.com"
-  "X-Auth-Key"   = "your-global-api-key"
+  "X-Auth-Email" = "your-email@example.com",  
+  "X-Auth-Key"   = "your-global-api-key",  
   "Content-Type" = "application/json"
 }
 
