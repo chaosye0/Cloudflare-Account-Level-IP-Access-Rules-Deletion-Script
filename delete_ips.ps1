@@ -1,14 +1,14 @@
-# === Config: Delete Zone-Level IP Access Rules ===
+# === Config: Delete account-Level IP Access Rules ===
 $headers = @{
-  "X-Auth-Email" = "your-email@example.com"
-  "X-Auth-Key"   = "your-global-api-key"
+  "X-Auth-Email" = "your account's email"
+  "X-Auth-Key"   = "your global api key"
   "Content-Type" = "application/json"
 }
 
-$zoneId = "your-zone-id"  # Replace with the actual zone ID (important)
+$account = "your account id"  # Replace with the actual account ID (important)
 
 # === Optional output logs ===
-$successLog = "$env:USERPROFILE\Desktop\deleted_zone_rules.txt"
+$successLog = "$env:USERPROFILE\Desktop\deleted_ip_rules.txt"
 $failLog    = "$env:USERPROFILE\Desktop\failed_deletions.txt"
 
 $allRules = @()
@@ -17,10 +17,10 @@ $perPage = 100
 $totalPages = 1
 $retryCount = 0
 
-Write-Host "`nFetching IP access rules for zone: $zoneId..." -ForegroundColor Cyan
+Write-Host "`nFetching IP access rules for account: $account..." -ForegroundColor Cyan
 
 do {
-    $url = "https://api.cloudflare.com/client/v4/zones/$zoneId/firewall/access_rules/rules?page=$page&per_page=$perPage"
+    $url = "https://api.cloudflare.com/client/v4/accounts/$account/firewall/access_rules/rules?page=$page&per_page=$perPage"
 
     try {
         $response = Invoke-RestMethod -Uri $url -Headers $headers -Method GET
@@ -40,7 +40,7 @@ do {
     }
 } while ($page -le $totalPages -and $retryCount -lt 10)
 
-Write-Host "`nFound $($allRules.Count) zone-level rule(s) to delete." -ForegroundColor Yellow
+Write-Host "`nFound $($allRules.Count) account-level rule(s) to delete." -ForegroundColor Yellow
 
 # === Delete rules one by one ===
 $counter = 0
@@ -51,9 +51,9 @@ foreach ($rule in $allRules) {
     $counter++
     $ruleId = $rule.id
     $ip = $rule.configuration.value
-    $url = "https://api.cloudflare.com/client/v4/zones/$zoneId/firewall/access_rules/rules/$ruleId"
+    $url = "https://api.cloudflare.com/client/v4/accounts/$account/firewall/access_rules/rules/$ruleId"
 
-    Write-Progress -Activity "Deleting zone-level rules" `
+    Write-Progress -Activity "Deleting account-level rules" `
                    -Status "Deleting rule $counter of $($allRules.Count)" `
                    -PercentComplete (($counter / $allRules.Count) * 100)
 
