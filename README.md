@@ -1,7 +1,8 @@
 Cloudflare account-Level IP Access Rules deletion script
 a script to auto delete hundreds of account-Level IP Access Rules.
 
-Thanks for alexfot94's "Cloudflare-Zone-Level-IP-Access-Rules-Deletion-Script". This script is modified from his work.
+Thanks for alexfot94's "[Cloudflare-Zone-Level-IP-Access-Rules-Deletion-Script](https://github.com/alexfot94/Cloudflare-Zone-Level-IP-Access-Rules-Deletion-Script)". This script is modified from his work.
+
 
 
 Before running the script, update the following configuration block with your actual Cloudflare credentials:
